@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] | EcommereRM</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/E_CommerceWebApplication.styles.css" asp-append-version="true" />
+    <link href="~/lib/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap-icons/font/bootstrap-icons.min.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet" />
+
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-primary"> <!-- Update bg-warning to bg-primary -->
+        <div class="container-fluid">
+            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                <ul class="navbar-nav">
+                    <!-- Liens Login et Register -->
+                    <li class="nav-item">
+                        <partial name="_LoginPartial" />
+                    </li>
+                </ul>
+                <ul class="navbar-nav mx-auto"> 
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="Category" asp-action="Index">Category</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="Product" asp-action="Index">Product</a>
+                    </li>
+                  @*   <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="Reservation" asp-action="Create"> Reservation </a>
+                    </li>
+                    
+                              @if(User.IsInRole("Admin"))
+    {
+        <li class="nav-item">
+            <a class="nav-link" asp-area="" asp-controller="Reservation" asp-action="index">Reservation List</a>
+        </li>
+    } *@
+                </ul>
+                <form class="d-flex" asp-controller="Product" asp-action="Search">
+                    <input class="form-control me-2" type="search" placeholder="Search " aria-label="Search" name="searchKey">
+                    <button class="btn btn-outline-light" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+</header
+    <div class="container mt-4">
+        <main role="main">
+            @RenderBody()
+        </main>
+    </div>
+
+    
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

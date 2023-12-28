@@ -1,0 +1,31 @@
+﻿@model EditCategoryViewModel
+@{
+    ViewData["title"] = "Edit Project Type";
+}
+<h1 class="align-content-center">@ViewData["title"]</h1>
+
+<form method="post" enctype="multipart/form-data" asp-controller="Category" asp-action="Edit">
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label"></label>
+        <input asp-for="Name" type="text" class="form-control">
+        <span class="text-danger" asp-validation-for="Description"></span>
+
+    </div>
+    <div class="mb-3">
+        <label asp-for="Description" class="form-label"></label>
+        <textarea asp-for="Description" class="form-control" maxlength="2500" rows="5"></textarea>
+        <span class="text-danger" asp-validation-for="Description"></span>
+
+    </div>
+    <div class="mb-3">
+        <label asp-for="Image" class="form-label"></label>
+        <input asp-for="Image" type="file" class="form-control">
+        <span class="text-danger" asp-validation-for="Image"></span>
+
+    </div>
+    <input type="hidden" asp-for="ExistsPhotoPath" />
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+<div class="from-group row col-sm-10 offest-4">
+    <img class="img-thumbnail" src="@Model.ExistsPhotoPath" asp-append-version="true" />
+</div>

@@ -1,0 +1,69 @@
+﻿@model CreateProductViewModel
+@{
+    ViewData["Title"] = "Add Product";
+}
+<h2>Add A New Picture</h2>
+<hr />
+
+<div class="row justify-content-between">
+    <div class="col-md-6">
+        <form method="post" asp-action="Create" enctype="multipart/form-data">
+            <input type="hidden" asp-for="ID" />
+            <div class="mb-3">
+                <label class="form-label" asp-for="Name">Name</label>
+                <input asp-for="Name" maxlength="250" type="text" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" asp-for="Price">Price</label>
+                <input asp-for="Price" maxlength="250" type="text" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" asp-for="CategoryId">Category</label>
+                <select class="form-select" asp-for="CategoryId" asp-items="@(new SelectList(Model.Categories, "Id", "Name"))">
+                    <option></option>
+                </select>
+                <span asp-validation-for="CategoryId" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" asp-for="Description">Description</label>
+                <textarea asp-for="Description" class="form-control" maxlength="2500" rows="5"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" asp-for="Image">Image</label>
+                <input type="file" class="form-control" asp-for="Image" onchange="previewImage"/>
+                <span asp-validation-for="Image" class="text-danger"></span>
+            </div>
+            <div class="mt-2">
+                <button type="submit" class="btn btn-primary">
+                    <i class="bi bi-check2"></i> Save
+                </button>
+                <a asp-action="index" class="btn btn-secondary">
+                    <i class="bi bi-x-circle-fill"></i> Cancel
+                </a>
+            </div>
+        </form>
+    </div>
+    <div class="col-md-4">
+        <div id="poster-container" class="@(Model.ID > 0 ? string.Empty : "d-none")">
+            @*<img src="@(Model.Id > 0 ? $"data:image/*;base64,{Convert.ToBase64String(Model.im)}" : string.Empty)" alt="Poster" class="img-thumbnail" />*@
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script>
+        function previewImage(event) {
+            var reader = new FileReader();
+            reader.onload = function () {
+                var imgElement = document.createElement('img');
+                imgElement.src = reader.result;
+                imgElement.classList.add('img-fluid');
+                document.getElementById('image-preview').innerHTML = '';
+                document.getElementById('image-preview').appendChild(imgElement);
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        }
+    </script>
+}

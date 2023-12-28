@@ -1,0 +1,78 @@
+﻿@page
+@using Microsoft.AspNetCore.Identity.UI.V5.Pages.Account.Internal;
+@model RegisterModel
+@{
+    ViewData["Title"] = "";
+}
+
+<style>
+    /* CSS pour centrer le formulaire */
+    .custom-form {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 80vh;
+        font-family: Arial, sans-serif;
+        background-color: #f5f5f5;
+    }
+
+        .custom-form .col-md-4 {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* CSS pour le bouton "Register" en rouge */
+        .custom-form button[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: red;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+            .custom-form button[type="submit"]:hover {
+                background-color: #c30000;
+            }
+</style>
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="custom-form">
+    <div class="col-md-4">
+        <section>
+            <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                <h4>        Register   </h4>
+                <hr />
+                <div asp-validation-summary="All" class="text-danger"></div>
+
+                <!-- Champs de formulaire par défaut -->
+                <div class="form-group">
+                    <label asp-for="Input.Email"></label>
+                    <input asp-for="Input.Email" class="form-control" />
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.Password"></label>
+                    <input asp-for="Input.Password" class="form-control" />
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.ConfirmPassword"></label>
+                    <input asp-for="Input.ConfirmPassword" class="form-control" />
+                    <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                </div>
+
+                <button type="submit">Register</button>
+            </form>
+        </section>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,28 @@
+﻿@model ProductDetails
+
+@{
+    ViewData["Title"] = "Product Details";
+}
+
+<div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
+    <div class="card" style="width: 30rem;">
+        <div class="card-header">
+            @Model.Name
+        </div>
+        <div class="card-body text-center">
+            <img class="card-img-top mb-3" src="@Model.ImageURL" asp-append-version="true" style="width:100%; max-height: 20em;" />
+            <h3 style="font-weight: bold;">@Model.Price LE</h3>
+            <p class="card-text">@Model.Description</p>
+        </div>
+        <div class="card-footer d-flex justify-content-between">
+            <a asp-action="" asp-controller="Product" class="btn btn-primary">Back</a>
+            @if (User.IsInRole("Admin"))
+            {
+                <a asp-action="Edit" asp-route-id="@Model.ID" class="btn btn-primary">Edit</a>
+                <a asp-action="Delete"
+                   onclick="return confirm('Are You Sure You Want To Delete @Model.Name ?')"
+                   asp-route-id="@Model.ID" class="btn btn-danger">Delete</a>
+            }
+        </div>
+    </div>
+</div>

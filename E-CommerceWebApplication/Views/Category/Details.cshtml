@@ -1,0 +1,24 @@
+﻿@model Category
+
+@{
+    ViewData["title"] = "View Projects Type";
+    string imagePath = "~/Images/Category/" + Model.ImageURL;
+}
+<div>
+    <div class="card-header d-flex justify-content-center align-items-center">
+        <h4 class="mb-0">@Model.Name</h4>
+    </div>
+    <div class="card-body text-center">
+        <img class="card-icon zoom-out img-fluid" src="@imagePath" asp-append-version="true" style="max-width: 50%; height: auto;" />
+        <h4>@Model.Description</h4>
+    </div>
+    <div class="card-footer text-center justify-content-between">
+        <a asp-action="ViewAllProducts" class="btn btn-outline-secondary">View All Products For @Model.Name</a>
+        <a asp-action="Index" class="btn btn-outline-secondary">Back</a>
+        @if (User.IsInRole("Admin"))
+        {
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-outline-secondary">Edit</a>
+            <a asp-action="Delete" onclick="return confirm('Are You Sure You Want To Delete @Model.Name ?')" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a>
+        }
+    </div>
+</div>

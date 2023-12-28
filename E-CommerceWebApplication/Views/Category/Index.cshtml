@@ -1,0 +1,54 @@
+﻿@model List<Category>
+@{
+    ViewData["Title"] = "All Categories";
+    string imagePath = "";
+}
+
+<h2 class="title"></h2>
+@if (User.IsInRole("Admin"))
+{
+    <a class="btn btn-primary" asp-action="Create">Add New Category</a>
+}
+
+<hr />
+
+@if (Model.Any())
+{
+    <div class="row">
+        @foreach (var category in Model)
+        {
+            imagePath = CategoryController.CategoryPhotoRootPath + category.ImageURL;
+            <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                <div class="card">
+                    <a asp-action="ViewAllProducts" asp-route-id="@category.Id">
+                        <img class="card-img-top" src="@imagePath" alt="@category.Name" style="object-fit: cover; height: 250px;">
+                    </a>
+                    <div class="card-body">
+                        <h5 class="card-title">@category.Name</h5>
+                        <p class="card-text">@category.Description</p>
+                    </div>
+                    <div class="card-footer">
+                        <div class="btn-group d-flex justify-content-between">
+                            <a asp-action="Details" asp-route-id="@category.Id" class="btn btn-outline-secondary">Details</a>
+                            <div class="dropdown">
+                               
+                                <ul class="dropdown-menu" aria-labelledby="categoryActionsDropdown">
+                                    <li><a class="dropdown-item" asp-action="ViewAllProducts" asp-route-id="@category.Id">View All</a></li>
+                                    @if (User.IsInRole("Admin"))
+                                    {
+                                        <li><a class="dropdown-item" asp-action="Edit" asp-route-id="@category.Id">Edit</a></li>
+                                        <li><a class="dropdown-item" asp-action="Delete" onclick="return confirm('Are you sure you want to delete @category.Name?')" asp-route-id="@category.Id">Delete</a></li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <div class="alert alert-warning mt-4">No Categories Found!</div>
+}

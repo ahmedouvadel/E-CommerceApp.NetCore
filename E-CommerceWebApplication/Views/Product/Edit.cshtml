@@ -1,0 +1,65 @@
+﻿@model EditProductViewModel
+@{
+    ViewData["Title"] = "Edit Product";
+}
+<h2>Edit A Product</h2>
+<hr />
+
+<div class="row justify-content-between">
+    <div class="col-md-6">
+        <form method="post" asp-action="Edit" enctype="multipart/form-data">
+            <input type="hidden" asp-for="ID" />
+            <div class="mb-3">
+                <label class="form-label" asp-for="Name">Name</label>
+                <input asp-for="Name" maxlength="250" type="text" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" asp-for="Price"></label>
+                <input asp-for="Price" maxlength="250" type="text" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" asp-for="CategoryId"></label>
+                <select class="form-select" asp-for="CategoryId" asp-items="@(new SelectList(Model.Categories, "Id", "Name"))">
+                    <option></option>
+                </select>
+                <span asp-validation-for="CategoryId" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" asp-for="Description">Description</label>
+                <textarea asp-for="Description" class="form-control" maxlength="2500" rows="5"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" asp-for="Image">Image</label>
+                <input type="file" class="form-control" asp-for="Image" />
+                <span asp-validation-for="Image" class="text-danger"></span>
+            </div>
+            <div class="mt-2">
+                <button type="submit" class="btn btn-primary">
+                    <i class="bi bi-check2"></i> Save
+                </button>
+                <a asp-action="index" class="btn btn-secondary">
+                    <i class="bi bi-x-circle-fill"></i> Cancel
+                </a>
+            </div>
+        </form>
+        <div class="from-group row col-sm-10 offset-2 mt-4">
+            <img class="img-thumbnail" src="@Model.ExistsPhotoPath" asp-append-version="true" />
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        function updateFileName() {
+            var fileName = document.getElementById("Image").files[0].name;
+            document.getElementById("ImageLabel").innerText = fileName;
+        }
+    </script>
+}

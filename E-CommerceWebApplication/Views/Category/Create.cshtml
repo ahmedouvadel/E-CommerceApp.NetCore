@@ -1,0 +1,47 @@
+﻿@model CategoryViewModel
+@{
+    ViewData["title"] = "Add Category";
+}
+<h2 class="text-center">@ViewData["title"]</h2>
+<hr />
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <form method="post" enctype="multipart/form-data" asp-controller="Category" asp-action="Create">
+            <div class="mb-3">
+                <label asp-for="Name" class="form-label">Name</label>
+                <input asp-for="Name" type="text" class="form-control">
+                <span class="text-danger" asp-validation-for="Name"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Description" class="form-label">Description</label>
+                <textarea asp-for="Description" class="form-control" maxlength="2500" rows="5"></textarea>
+                <span class="text-danger" asp-validation-for="Description"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Image" class="form-label">Image</label>
+                <input asp-for="Image" type="file" class="form-control" onchange="previewImage(event)">
+                <span class="text-danger" asp-validation-for="Image"></span>
+            </div>
+            <button type="submit" class="btn btn-secondary">Submit</button>
+        </form>
+    </div>
+    <div class="col-md-4">
+        <div id="image-preview" class="text-center"></div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function previewImage(event) {
+            var reader = new FileReader();
+            reader.onload = function () {
+                var imgElement = document.createElement('img');
+                imgElement.src = reader.result;
+                imgElement.classList.add('img-fluid');
+                document.getElementById('image-preview').innerHTML = '';
+                document.getElementById('image-preview').appendChild(imgElement);
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        }
+    </script>
+}
