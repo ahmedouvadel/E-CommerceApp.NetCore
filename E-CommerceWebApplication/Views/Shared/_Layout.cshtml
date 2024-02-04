@@ -30,14 +30,17 @@
                     <li class="nav-item">
                         <a class="nav-link" asp-area="" asp-controller="Product" asp-action="Index">Product</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="Panier" asp-action="Index">Panier</a>
+                    </li>
                   @*   <li class="nav-item">
-                        <a class="nav-link" asp-area="" asp-controller="Reservation" asp-action="Create"> Reservation </a>
+                        <a class="nav-link" asp-area="" asp-controller="order" asp-action="Create"> ShoppingOrder </a>
                     </li>
                     
                               @if(User.IsInRole("Admin"))
     {
         <li class="nav-item">
-            <a class="nav-link" asp-area="" asp-controller="Reservation" asp-action="index">Reservation List</a>
+            <a class="nav-link" asp-area="" asp-controller="Order" asp-action="index">ShoppingOrder List</a>
         </li>
     } *@
                 </ul>

@@ -54,8 +54,36 @@ h3 {
 .zoom-effect:hover .zoom-out {
     transform: scale(1.1);
 }
+/* Add some basic styling to your navbar */
 .navbar {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    background-color: #222; /* Set your desired dark background color */
+    padding: 15px;
+    color: #fff; /* Set text color to white or any color that suits your design */
+    font-family: Arial, sans-serif;
+    transition: background-color 0.3s ease; /* Add a smooth transition for background color change */
 }
+
+    /* Add a hover effect to the navbar links */
+    .navbar a:hover {
+        color: #ffcc00; /* Change text color on hover to a different color */
+    }
+
+/* Add animation to the navbar */
+@keyframes slideIn {
+    from {
+        transform: translateY(-50px); /* Slide in from the top */
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Apply the animation to the navbar */
+.navbar {
+    animation: slideIn 0.5s ease-in-out; /* Use the slideIn animation with a duration of 0.5 seconds */
+}
+
 
